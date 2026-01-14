@@ -293,11 +293,11 @@ jobs:
           exit 1
         fi
     
-    - name: Execute Workflow WF_ADB
+    - name: Execute Workflow Proyecto_Final
       run: |
         DEST_HOST=${{ secrets.DATABRICKS_DEST_HOST }}
         DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN }}
-        WORKFLOW_NAME="WF_ADB"
+        WORKFLOW_NAME="Proyecto_Final"
         
         echo "🚀 Ejecutando workflow: $WORKFLOW_NAME"
         
