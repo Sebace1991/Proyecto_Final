@@ -258,7 +258,7 @@ jobs:
       run: |
         DEST_HOST=${{ secrets.DATABRICKS_DEST_HOST }}
         DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN }}
-        WORKFLOW_NAME="WF_ADB"
+        WORKFLOW_NAME="movies-etl-pipeline"
         
         echo "🔍 Validando la configuración del workflow creado..."
         
@@ -297,7 +297,7 @@ jobs:
       run: |
         DEST_HOST=${{ secrets.DATABRICKS_DEST_HOST }}
         DEST_TOKEN=${{ secrets.DATABRICKS_DEST_TOKEN }}
-        WORKFLOW_NAME="Proyecto_Final"
+        WORKFLOW_NAME="movies-etl-pipeline"
         
         echo "🚀 Ejecutando workflow: $WORKFLOW_NAME"
         
