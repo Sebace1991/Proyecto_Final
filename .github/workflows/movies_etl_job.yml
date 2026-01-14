@@ -17,8 +17,8 @@ jobs:
       run: |
         ORIGIN_HOST=${{ secrets.DATABRICKS_ORIGIN_HOST }}
         ORIGIN_TOKEN=${{ secrets.DATABRICKS_ORIGIN_TOKEN }}
-        NOTEBOOK_BASE="/Workspace/Clase12/source_ntbk"
-        NOTEBOOKS=("ntbk_1" "ntbk_2")  # Agrega más según necesitesas
+        NOTEBOOK_BASE="/Workspace/Repos/dev/databricks-movies-project/notebooks"
+        NOTEBOOKS=("bronze_movies" "silver_movies" "ingest_raw_movies" "gold_movies_analytics")  # Agrega más según necesitesas
         mkdir -p notebooks_to_deploy
         for nb in "${NOTEBOOKS[@]}"; do
           echo "Exportando $nb en modo raw..."
