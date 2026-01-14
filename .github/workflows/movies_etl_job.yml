@@ -17,7 +17,7 @@ jobs:
       run: |
         ORIGIN_HOST=${{ secrets.DATABRICKS_ORIGIN_HOST }}
         ORIGIN_TOKEN=${{ secrets.DATABRICKS_ORIGIN_TOKEN }}
-        NOTEBOOK_BASE="/Workspace/Repos/dev/databricks-movies-project/notebooks"
+        NOTEBOOK_BASE="/Workspace/Proyecto_Final"
         NOTEBOOKS=("bronze_movies" "silver_movies" "ingest_raw_movies" "gold_movies_analytics")  # Agrega más según necesitesas
         mkdir -p notebooks_to_deploy
         for nb in "${NOTEBOOKS[@]}"; do
