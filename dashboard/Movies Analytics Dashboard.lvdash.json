@@ -1,0 +1,503 @@
+{
+  "datasets": [
+    {
+      "name": "3d5e1925",
+      "displayName": "movies_kpi",
+      "queryLines": [
+        "SELECT \r\n",
+        "  total_movies,\r\n",
+        "  ROUND(avg_rating, 2) AS avg_rating,\r\n",
+        "  ROUND(avg_runtime, 1) AS avg_runtime\r\n",
+        "FROM gold_movies.movies_kpi;"
+      ],
+      "catalog": "golden",
+      "schema": "gold_movies"
+    },
+    {
+      "name": "30da555c",
+      "displayName": "movies_by_genre",
+      "queryLines": [
+        "SELECT \r\n",
+        "  genres,\r\n",
+        "  movies_count,\r\n",
+        "  ROUND(avg_rating, 2) AS avg_rating\r\n",
+        "FROM gold_movies.movies_by_genre\r\n",
+        "ORDER BY movies_count DESC;"
+      ],
+      "catalog": "golden",
+      "schema": "gold_movies"
+    },
+    {
+      "name": "ad26ea8d",
+      "displayName": "movies_by_year",
+      "queryLines": [
+        "SELECT * FROM golden.gold_movies.movies_by_year"
+      ],
+      "catalog": "golden",
+      "schema": "gold_movies"
+    },
+    {
+      "name": "3a055f3f",
+      "displayName": "top_rated_movies",
+      "queryLines": [
+        "SELECT \r\n",
+        "  title,\r\n",
+        "  rating\r\n",
+        "FROM gold_movies.top_rated_movies\r\n",
+        "ORDER BY rating DESC\r\n",
+        "LIMIT 10;"
+      ],
+      "catalog": "golden",
+      "schema": "gold_movies"
+    }
+  ],
+  "pages": [
+    {
+      "name": "8466133e",
+      "displayName": "Tablero",
+      "layout": [
+        {
+          "widget": {
+            "name": "avg-rating",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "3d5e1925",
+                  "fields": [
+                    {
+                      "name": "sum(avg_rating)",
+                      "expression": "SUM(`avg_rating`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(avg_rating)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 0
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Rating"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "7e3e7aba",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "3d5e1925",
+                  "fields": [
+                    {
+                      "name": "sum(avg_runtime)",
+                      "expression": "SUM(`avg_runtime`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(avg_runtime)"
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Runtime"
+              }
+            }
+          },
+          "position": {
+            "x": 5,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "a97489fe",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "3d5e1925",
+                  "fields": [
+                    {
+                      "name": "sum(total_movies)",
+                      "expression": "SUM(`total_movies`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_movies)",
+                  "format": {
+                    "type": "number-plain",
+                    "abbreviation": "none",
+                    "decimalPlaces": {
+                      "type": "max",
+                      "places": 0
+                    }
+                  }
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Total películas"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 1,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "44ce3876",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "30da555c",
+                  "fields": [
+                    {
+                      "name": "genres",
+                      "expression": "`genres`"
+                    },
+                    {
+                      "name": "sum(movies_count)",
+                      "expression": "SUM(`movies_count`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "genres",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(movies_count)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 9,
+            "width": 4,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "ea0be40f",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "3a055f3f",
+                  "fields": [
+                    {
+                      "name": "title",
+                      "expression": "`title`"
+                    },
+                    {
+                      "name": "rating",
+                      "expression": "`rating`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "title",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "string",
+                    "displayAs": "string",
+                    "visible": true,
+                    "order": 100000,
+                    "title": "title",
+                    "allowSearch": false,
+                    "alignContent": "left",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  },
+                  {
+                    "fieldName": "rating",
+                    "numberFormat": "0.00",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "imageUrlTemplate": "{{ @ }}",
+                    "imageTitleTemplate": "{{ @ }}",
+                    "imageWidth": "",
+                    "imageHeight": "",
+                    "linkUrlTemplate": "{{ @ }}",
+                    "linkTextTemplate": "{{ @ }}",
+                    "linkTitleTemplate": "{{ @ }}",
+                    "linkOpenInNewTab": true,
+                    "type": "float",
+                    "displayAs": "number",
+                    "visible": true,
+                    "order": 100001,
+                    "title": "rating",
+                    "allowSearch": false,
+                    "alignContent": "right",
+                    "allowHTML": false,
+                    "highlightLinks": false,
+                    "useMonospaceFont": false,
+                    "preserveWhitespace": false
+                  }
+                ]
+              },
+              "invisibleColumns": [],
+              "allowHTMLByDefault": false,
+              "itemsPerPage": 25,
+              "paginationSize": "default",
+              "condensed": true,
+              "withRowNumber": true
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 9,
+            "width": 2,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "c007402d",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ad26ea8d",
+                  "fields": [
+                    {
+                      "name": "release_year",
+                      "expression": "`release_year`"
+                    },
+                    {
+                      "name": "sum(movies_count)",
+                      "expression": "SUM(`movies_count`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "release_year",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(movies_count)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "0a3a3411",
+            "multilineTextboxSpec": {
+              "lines": [
+                "<span style=\"text-align:center;display:block\"><span style=\"font-size:24px\">**Análisis de películas en el tiempo**</span></span>"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "genero",
+            "queries": [
+              {
+                "name": "dashboards/01f0f15fac7b18188835154de88d4c82/datasets/01f0f15fe0981feb8be3bbec013e8975_genres",
+                "query": {
+                  "datasetName": "30da555c",
+                  "fields": [
+                    {
+                      "name": "genres",
+                      "expression": "`genres`"
+                    },
+                    {
+                      "name": "genres_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "genres",
+                    "queryName": "dashboards/01f0f15fac7b18188835154de88d4c82/datasets/01f0f15fe0981feb8be3bbec013e8975_genres"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Género"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 1,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "ano",
+            "queries": [
+              {
+                "name": "dashboards/01f0f15fac7b18188835154de88d4c82/datasets/01f0f15fe16c141fa221b9a555278a78_release_year",
+                "query": {
+                  "datasetName": "ad26ea8d",
+                  "fields": [
+                    {
+                      "name": "release_year",
+                      "expression": "`release_year`"
+                    },
+                    {
+                      "name": "release_year_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "release_year",
+                    "queryName": "dashboards/01f0f15fac7b18188835154de88d4c82/datasets/01f0f15fe16c141fa221b9a555278a78_release_year"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Año"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 1,
+            "height": 1
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
